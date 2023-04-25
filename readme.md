@@ -7,8 +7,7 @@ A sample electron terminal.
 ### NODE.JS
 
 ```
-curl "https://raw.githubusercontent.com/creationix/nvm/master/install.sh"  | bash
-https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh
+curl "https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh"  | bash
 source ~/.profile
 nvm install node
 ```
