@@ -1,20 +1,10 @@
-var devtoolsOn = true;
+/**** START - INIT *****/
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path')
 const fs = require('fs');
 const os = require('os');
 const pty = require('node-pty');
-
-function readConf() {
-    const data = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
-    return data;
-}
-
-ipcMain.on('synchronous-message', (event, arg) => {
-    event.returnValue = readConf();
-});
-
 const shell = process.env.SHELL || (os.platform() === 'win32' ? 'powershell.exe' : 'bash');
 const ptyProcess = pty.spawn(shell, ['-i'], {
   name: 'xterm-color',
@@ -24,8 +14,25 @@ const ptyProcess = pty.spawn(shell, ['-i'], {
   env: process.env,
 });
 
+/**** END - INIT *****/
+
+
+/**** START - VARS *****/
+
+var devtoolsOn = true;
+
+/**** END - INIT *****/
+
+
+/**** START - FUNCTIONS *****/
+
+function readConf() {
+    const data = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
+    return data;
+}
+
 function createWindow() {
-    // Create a new window
+    // INIT
     const window = new BrowserWindow({
         transparent: true,
         width: 800,
@@ -40,14 +47,17 @@ function createWindow() {
         }
     });
 
+    window.loadFile("src/index.html");
+
+    // EVENT LISTENERS
+
     ptyProcess.on('data', (data) => {
         window.webContents.send('terminal.fromPty', data);
     });
 
     ptyProcess.on('exit', () => {
         window.close();
-      });
-      
+    });      
 
     ipcMain.on('terminal.toPty', (event, data) => {
         ptyProcess.write(data);
@@ -55,6 +65,10 @@ function createWindow() {
 
     ipcMain.on('update-title', (event, title) => {
         window.setTitle(title);
+    }); 
+    
+    ipcMain.on('synchronous-message', (event, arg) => {
+        event.returnValue = readConf();
     });
 
     window.webContents.on("did-finish-load", () => {
@@ -80,6 +94,7 @@ function createWindow() {
 
         window.show();
         window.focus();
+        
     });
 
     window.on("close", () => {
@@ -87,21 +102,22 @@ function createWindow() {
         app.quit();
      });
 
-    window.loadFile("src/index.html");
+    app.on("window-all-closed", function () {
+        if (process.platform !== "darwin") {
+            app.quit();
+        }
+    });
 
 }
 
+
+/**** END - FUNCTIONS *****/
+
+
+/**** START - APP READY *****/
+
 app.whenReady().then(() => {
     createWindow();
-    app.on("activate", () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    });
 });
 
-app.on("window-all-closed", function () {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
-});
+/**** END - APP READY *****/

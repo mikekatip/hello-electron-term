@@ -1,15 +1,16 @@
 {
   "name": "hello-electron-term",
-  "title": "Hello, Electron Terminal!",
-  "version": "23.4.24",
+  "title": "hello-electron-term",
+  "version": "23.4.25",
   "description": "A sample electron terminal.",
   "main": "src/js/electron.js",
   "private": true,
   "scripts": {
-    "start": "npm version --no-git-tag-version 0.0.0 && npm version --no-git-tag-version $(date +%y.%m.%d) && electron .",
-    "build-linux": "npm version --no-git-tag-version 0.0.0 && npm version --no-git-tag-version $(date +%y.%m.%d) && ./node_modules/.bin/electron-builder --linux AppImage",
+    "update-app-version": "npm version --no-git-tag-version 0.0.0 && npm version --no-git-tag-version $(date +%y.%m.%d)",
+    "start": "npm run update-app-version && electron .",
+    "build-linux": "npm run update-app-version && ./node_modules/.bin/electron-builder --linux AppImage",
     "build": "npm run build-linux",
-    "update": "./node_modules/.bin/ncu -u && npm install",
+    "update-node-modules": "./node_modules/.bin/ncu -u && npm install",
     "postinstall": "npm audit fix --force && ./node_modules/.bin/electron-rebuild"
   },
   "build": {
@@ -23,12 +24,12 @@
     }
   },
   "author": "Mike Katip",
-  "homepage": "https://github.com/mikekatip",
+  "homepage": "https://github.com/mikekatip/hello-electron-term",
   "email": "mike@katip.name",
   "license": "GPLV3",
   "devDependencies": {
     "electron": "latest",
-    "electron-builder": "latest"
+    "electron-builder": "^24.2.1"
   },
   "dependencies": {
     "@electron/rebuild": "latest",
@@ -37,6 +38,7 @@
     "npm-check-updates": "latest",
     "xterm": "latest",
     "xterm-addon-fit": "latest",
-    "xterm-addon-ligatures": "latest"
+    "xterm-addon-ligatures": "latest",
+    "xterm-addon-web-links": "latest"
   }
 }
