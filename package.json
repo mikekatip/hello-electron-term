@@ -1,0 +1,42 @@
+{
+  "name": "hello-electron-term",
+  "title": "Hello, Electron Terminal!",
+  "version": "23.4.24",
+  "description": "A sample electron terminal.",
+  "main": "src/js/electron.js",
+  "private": true,
+  "scripts": {
+    "start": "npm version --no-git-tag-version 0.0.0 && npm version --no-git-tag-version $(date +%y.%m.%d) && electron .",
+    "build-linux": "npm version --no-git-tag-version 0.0.0 && npm version --no-git-tag-version $(date +%y.%m.%d) && ./node_modules/.bin/electron-builder --linux AppImage",
+    "build": "npm run build-linux",
+    "update": "./node_modules/.bin/ncu -u && npm install",
+    "postinstall": "npm audit fix --force && ./node_modules/.bin/electron-rebuild"
+  },
+  "build": {
+    "directories": {
+      "buildResources": "resources"
+    },
+    "linux": {
+      "category": "Development",
+      "icon": "path.join(__dirname, 'src/images/icon/icon.png');",
+      "maintainer": "Mike Katip"
+    }
+  },
+  "author": "Mike Katip",
+  "homepage": "https://github.com/mikekatip",
+  "email": "mike@katip.name",
+  "license": "GPLV3",
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "dependencies": {
+    "@electron/rebuild": "latest",
+    "jquery": "latest",
+    "node-pty": "latest",
+    "npm-check-updates": "latest",
+    "xterm": "latest",
+    "xterm-addon-fit": "latest",
+    "xterm-addon-ligatures": "latest"
+  }
+}
