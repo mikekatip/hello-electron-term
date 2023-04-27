@@ -29,10 +29,10 @@
   "license": "GPLV3",
   "devDependencies": {
     "electron": "latest",
-    "electron-builder": "^24.2.1"
+    "electron-builder": "^24.2.1",
+    "@electron/rebuild": "latest"
   },
   "dependencies": {
-    "@electron/rebuild": "latest",
     "electron-context-menu": "latest",
     "jquery": "latest",
     "node-pty": "latest",
