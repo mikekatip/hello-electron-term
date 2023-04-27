@@ -1,6 +1,6 @@
 /**** START - INIT *****/
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path')
 const fs = require('fs');
 const os = require('os');
@@ -12,6 +12,30 @@ const ptyProcess = pty.spawn(shell, ['-i'], {
   rows: 24,
   cwd: process.env.HOME,
   env: process.env,
+});
+
+const contextMenu = require('electron-context-menu');
+
+/*
+contextMenu({
+    showSearchWithGoogle: false,
+    showInspectElement: false,
+    showSelectAll: false
+});
+*/
+
+contextMenu({
+    showSearchWithGoogle: false,
+    showInspectElement: false,
+    showSelectAll: false,
+    menu: (actions, props, browserWindow, dictionarySuggestions) => [
+		actions.copy({
+			transform: content => `${content}`
+		}),
+		actions.paste({
+			transform: content => `${content}`
+		})
+	]
 });
 
 /**** END - INIT *****/

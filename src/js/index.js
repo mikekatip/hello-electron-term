@@ -1,7 +1,7 @@
 /**** START -- INIT ****/
 
 window.$ = window.jQuery = require('jquery');
-const { app, BrowserWindow, Menu, ipcRenderer, shell } = require('electron');
+const { app, BrowserWindow, ipcRenderer, shell, remote } = require('electron');
 const os = require('os');
 config = JSON.parse(ipcRenderer.sendSync('synchronous-message', ''));
 
@@ -21,6 +21,7 @@ const handleLink = (event, uri) => {
 };
 const webLinksAddon = new WebLinksAddon(handleLink);
 terminal.loadAddon(webLinksAddon);
+
 
 /**** END -- INIT ****/
 

@@ -1,7 +1,7 @@
 {
   "name": "hello-electron-term",
   "title": "hello-electron-term",
-  "version": "23.4.25",
+  "version": "23.4.27",
   "description": "A sample electron terminal.",
   "main": "src/js/electron.js",
   "private": true,
@@ -33,12 +33,12 @@
   },
   "dependencies": {
     "@electron/rebuild": "latest",
+    "electron-context-menu": "latest",
     "jquery": "latest",
     "node-pty": "latest",
     "npm-check-updates": "latest",
     "xterm": "latest",
     "xterm-addon-fit": "latest",
-    "xterm-addon-ligatures": "latest",
     "xterm-addon-web-links": "latest"
   }
 }
