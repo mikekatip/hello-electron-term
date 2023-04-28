@@ -1,7 +1,7 @@
 /**** START -- INIT ****/
 
 window.$ = window.jQuery = require('jquery');
-const { app, BrowserWindow, ipcRenderer, shell, remote } = require('electron');
+const { app, BrowserWindow, electron, ipcRenderer, shell, remote } = require('electron');
 const os = require('os');
 config = JSON.parse(ipcRenderer.sendSync('synchronous-message', ''));
 
@@ -21,7 +21,6 @@ const handleLink = (event, uri) => {
 };
 const webLinksAddon = new WebLinksAddon(handleLink);
 terminal.loadAddon(webLinksAddon);
-
 
 /**** END -- INIT ****/
 
@@ -51,6 +50,7 @@ jQuery( document ).ready(function() {
   console.log('Electron Version: ' + process.versions.electron);
   console.log('jQuery Version: ' + jQuery.fn.jquery);
   jQuery(".title").html(config.title);
+
   /**** END -- GET CONFIG ****/
 
 

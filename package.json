@@ -1,7 +1,7 @@
 {
   "name": "hello-electron-term",
   "title": "hello-electron-term",
-  "version": "23.4.27",
+  "version": "23.4.28",
   "description": "A sample electron terminal.",
   "main": "src/js/electron.js",
   "private": true,
