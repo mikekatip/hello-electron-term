@@ -16,20 +16,12 @@ const ptyProcess = pty.spawn(shell, ['-i'], {
 
 const contextMenu = require('electron-context-menu');
 
-/*
-contextMenu({
-    showSearchWithGoogle: false,
-    showInspectElement: false,
-    showSelectAll: false
-});
-*/
-
 contextMenu({
     showSearchWithGoogle: false,
     showInspectElement: false,
     showSelectAll: false,
     menu: (actions, props, browserWindow, dictionarySuggestions) => [
-		actions.copy({
+        actions.copy({
 			transform: content => `${content}`
 		}),
 		actions.paste({
