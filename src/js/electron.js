@@ -8,8 +8,8 @@ const pty = require('node-pty');
 const shell = process.env.SHELL || (os.platform() === 'win32' ? 'powershell.exe' : 'bash');
 const ptyProcess = pty.spawn(shell, ['-i'], {
   name: 'xterm-color',
-  cols: 80,
-  rows: 24,
+  cols: 90,
+  rows: 36,
   cwd: process.env.HOME,
   env: process.env,
 });
@@ -94,6 +94,12 @@ function createWindow() {
     ipcMain.on('synchronous-message', (event, arg) => {
         event.returnValue = readConf();
     });
+
+    ipcMain.on('terminal.resize', (event, size) => {
+        if (ptyProcess && size.cols > 0 && size.rows > 0) {
+          ptyProcess.resize(size.cols, size.rows);
+        }
+      });
 
     window.webContents.on("did-finish-load", () => {
 

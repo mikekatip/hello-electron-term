@@ -97,7 +97,13 @@ jQuery( document ).ready(function() {
   window.addEventListener('resize', () => {
     resize();
   });
-  
+
+  terminal.onResize(function (size) {
+    ipcRenderer.send("terminal.resize", size);
+  });
+
+
+
   /**** END - EVENT LISTENERS ****/
 
 });
